@@ -8,6 +8,7 @@ import { User, Tractor, Droplets, Edit3, Save, Camera, CheckCircle, Plus, Trash2
   AlertTriangle, LogOut
 } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { BACKEND_URL } from '../api/client'
 import ConfirmModal from '../components/ConfirmModal'
 
 const STATES = ['Andhra Pradesh', 'Bihar', 'Gujarat', 'Haryana', 'Karnataka', 'Kerala', 'Madhya Pradesh', 'Maharashtra', 'Punjab', 'Rajasthan', 'Tamil Nadu', 'Telangana', 'Uttar Pradesh', 'West Bengal', 'Odisha', 'Assam']
@@ -77,7 +78,7 @@ export default function FarmerProfile() {
   }
 
   const u = (k, v) => setProfile(p => ({ ...p, [k]: v }))
-  const avatarSrc = profile?.avatar_url ? (profile.avatar_url.startsWith('/uploads') ? `http://localhost:8000${profile.avatar_url}` : profile.avatar_url) : null
+  const avatarSrc = profile?.avatar_url ? (profile.avatar_url.startsWith('/uploads') ? `${BACKEND_URL}${profile.avatar_url}` : profile.avatar_url) : null
 
   const MENU_ITEMS = [
     { id: 'profile', label: t('profile'), icon: User },

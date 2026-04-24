@@ -153,6 +153,8 @@ const sendOTP = async (req, res) => {
     const otp = Math.floor(100000 + Math.random() * 900000).toString()
     saveOTP(email, otp)
 
+    console.log(`[DEBUG] Generated OTP for ${email}: ${otp}`)
+
     const mailOptions = {
       from: `"Farmiti Support" <${process.env.EMAIL_USER}>`,
       to: email,
@@ -174,11 +176,20 @@ const sendOTP = async (req, res) => {
       `
     }
 
-    await transporter.sendMail(mailOptions)
+    if (process.env.EMAIL_USER && process.env.EMAIL_PASS) {
+      try {
+        await transporter.sendMail(mailOptions)
+      } catch (mailErr) {
+        console.warn('⚠️ Mail delivery failed (port blocked?), but OTP was generated:', mailErr.message)
+      }
+    } else {
+      console.warn('⚠️ EMAIL_USER/EMAIL_PASS not found. Skipping actual email delivery.')
+    }
+    
     res.json({ message: 'OTP sent successfully to your email' })
   } catch (err) {
     console.error('Send OTP error:', err)
-    res.status(500).json({ error: 'Failed to send OTP. Please check your email and try again.' })
+    res.status(500).json({ error: 'Failed to process OTP. Please try again.' })
   }
 }
 

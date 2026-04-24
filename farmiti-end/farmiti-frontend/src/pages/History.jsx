@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useLang } from '../context/LanguageContext'
 import { historyAPI } from '../api/services'
 import { Sprout, ScanSearch, FileText, CloudSun, Clock, ChevronRight, Filter, Trash2, RefreshCcw, AlertTriangle, CheckCircle, Target, ShieldCheck, Zap } from 'lucide-react'
+import { BACKEND_URL } from '../api/client'
 import ConfirmModal from '../components/ConfirmModal'
 
 const TYPE_CFG = {
@@ -238,7 +239,7 @@ export default function History() {
                       <div className="space-y-6">
                         <div className="bg-white border border-red-100 rounded-[2rem] overflow-hidden shadow-sm">
                            <div className="flex flex-col md:flex-row items-stretch">
-                             {item.image_url && <img src={`http://localhost:8000${item.image_url}`} className="md:w-48 object-cover border-r border-red-50" alt="" />}
+                             {item.image_url && <img src={`${BACKEND_URL}${item.image_url}`} className="md:w-48 object-cover border-r border-red-50" alt="" />}
                              <div className="p-5 flex-1 space-y-3">
                                <div className="flex items-center justify-between">
                                  <div>

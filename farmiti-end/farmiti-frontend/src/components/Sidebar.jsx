@@ -1,5 +1,6 @@
 import React from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
+import { BACKEND_URL } from '../api/client'
 import { useAuth } from '../context/AuthContext'
 import { useLang } from '../context/LanguageContext'
 import {
@@ -28,7 +29,7 @@ export default function Sidebar({ open, setOpen }) {
   ]
 
   const avatarSrc = farmer?.avatar_url
-    ? (farmer.avatar_url.startsWith('/uploads') ? `http://localhost:8000${farmer.avatar_url}` : farmer.avatar_url)
+    ? (farmer.avatar_url.startsWith('/uploads') ? `${BACKEND_URL}${farmer.avatar_url}` : farmer.avatar_url)
     : null
 
   return (

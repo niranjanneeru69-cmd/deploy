@@ -3,6 +3,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { useLang } from '../context/LanguageContext'
 import { notificationAPI } from '../api/services'
+import { BACKEND_URL } from '../api/client'
 import { Search, Bell, Settings, LogOut, Check, Globe, ChevronDown, MessageSquareText, ScanSearch, FileText, History, Users, Calendar as CalendarIcon, Trash2, CheckCircle, HelpCircle, X } from 'lucide-react'
 import { useToast } from '../context/ToastContext'
 import Logo from './Logo'
@@ -99,7 +100,7 @@ export default function TopBar() {
   }
 
   const avatarSrc = farmer?.avatar_url
-    ? (farmer.avatar_url.startsWith('/uploads') ? `http://localhost:8000${farmer.avatar_url}` : farmer.avatar_url)
+    ? (farmer.avatar_url.startsWith('/uploads') ? `${BACKEND_URL}${farmer.avatar_url}` : farmer.avatar_url)
     : null
 
   const LINKS = [
