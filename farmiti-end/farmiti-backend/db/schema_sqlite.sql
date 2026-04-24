@@ -46,6 +46,9 @@ CREATE TABLE farm_details (
   account_no TEXT,
   ifsc TEXT,
   aadhaar TEXT,
+  latitude REAL,
+  longitude REAL,
+  soil_report TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (farmer_id) REFERENCES farmers(id) ON DELETE CASCADE

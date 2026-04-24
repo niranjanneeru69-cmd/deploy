@@ -43,7 +43,12 @@ async function getDb() {
 // SQLite natively supports ?, ?1, $name, etc.
 // The existing app uses ? for mysql, which works fine in sqlite too.
 // If it uses $1, $2, we convert to ? since mysql was doing that.
-const toSQLite = (sql) => sql.replace(/\$\d+/g, '?')
+const toSQLite = (sql) => {
+  return sql
+    .replace(/\$\d+/g, '?')
+    .replace(/CURDATE\(\)/gi, "date('now')")
+    .replace(/NOW\(\)/gi, "CURRENT_TIMESTAMP")
+}
 const stripReturning = (sql) => sql.replace(/\s+RETURNING\s+[\w\s,.*]+$/i, '')
 
 /**
